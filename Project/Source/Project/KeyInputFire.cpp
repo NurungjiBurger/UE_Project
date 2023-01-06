@@ -9,6 +9,8 @@ AKeyInputFire::AKeyInputFire()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	AutoPossessPlayer = EAutoReceiveInput::Player0;
+
 	// 파티클 생성 및 루트 컴포넌트 할당
 	RootComponent = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("RootComponent"));
 	FireParticle = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Fire Particle"));
@@ -56,4 +58,5 @@ void AKeyInputFire::OffFire()
 	//GetWorldTimerManager().ClearTimer(FireTImerHandle);
 	// 파티클 비활성화
 	FireParticle->DeactivateSystem();
+	UE_LOG(LogTemp, Error, TEXT("실행됨"));
 }
