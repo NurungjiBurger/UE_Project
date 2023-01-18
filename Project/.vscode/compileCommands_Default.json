@@ -1,5 +1,21 @@
 [
 	{
+		"file": "C:\\Users\\User\\Documents\\GitHub\\UE_Project\\UE_Project\\Project\\Source\\Project\\FPSCharacter.cpp",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe",
+			"@C:\\Users\\User\\Documents\\GitHub\\UE_Project\\UE_Project\\Project\\.vscode\\compileCommands_Default\\Project.255.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.1\\Engine\\Source"
+	},
+	{
+		"file": "C:\\Users\\User\\Documents\\GitHub\\UE_Project\\UE_Project\\Project\\Source\\Project\\FPSCharacter.h",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe",
+			"@C:\\Users\\User\\Documents\\GitHub\\UE_Project\\UE_Project\\Project\\.vscode\\compileCommands_Default\\Project.255.rsp"
+		],
+		"directory": "C:\\Program Files\\Epic Games\\UE_5.1\\Engine\\Source"
+	},
+	{
 		"file": "C:\\Users\\User\\Documents\\GitHub\\UE_Project\\UE_Project\\Project\\Source\\Project\\Project.Build.cs",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Tools\\MSVC\\14.29.30133\\bin\\HostX64\\x64\\cl.exe",

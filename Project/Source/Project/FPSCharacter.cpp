@@ -56,12 +56,15 @@ void AFPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	InputComponent->BindAxis("MoveX", this, &AFPSCharacter::MoveX);
 	InputComponent->BindAxis("MoveY", this, &AFPSCharacter::MoveY);
 
-	InputComponent->BindAction("Jump", IE_Pressed, this, &AFPSCharacter::StartJump);
-	InputComponent->BindAction("Jump", IE_Released, this, &AFPSCharacter::StopJump);
-
 	// 플레이어의 마우스에 따른 카메라 회전은 필수함수로 제공되고 있어서 MoveX 처럼 구현할 필요가 없음.
 	InputComponent->BindAxis("Turn", this, &AFPSCharacter::AddControllerYawInput);
 	InputComponent->BindAxis("LookUp", this, &AFPSCharacter::AddControllerPitchInput);
+
+
+	InputComponent->BindAction("Jump", IE_Pressed, this, &AFPSCharacter::StartJump);
+	InputComponent->BindAction("Jump", IE_Released, this, &AFPSCharacter::StopJump);
+
+	InputComponent->BindAction("Fire", IE_Pressed, this, &AFPSCharacter::Fire);
 }
 
 void AFPSCharacter::MoveX(float AxisValue)
@@ -86,4 +89,36 @@ void AFPSCharacter::StartJump()
 void AFPSCharacter::StopJump()
 {
 	bPressedJump = false;
+}
+
+void AFPSCharacter::Fire()
+{
+	if (ProjectileClass)
+	{
+		FVector CameraLocation;
+		FRotator CameraRotation;
+		GetActorEyesViewPoint(CameraLocation, CameraRotation);
+
+		FVector MuzzleLocation = CameraLocation + FTransform(CameraRotation).TransformVector(MuzzleOffset);
+		FRotator MuzzleRotation = CameraRotation;
+		MuzzleRotation.Pitch += 10.0f;
+
+		UWorld* World = GetWorld();
+		if (World)
+		{
+			// 카메라의 위치와 방향을 구함.
+			FActorSpawnParameters SpawnParams;
+			SpawnParams.Owner = this;
+			SpawnParams.Instigator = GetInstigator();
+
+			// 카메라의 위치와 방향을 통해 발사체가 생성될 위치를 구함.
+			AFPSProjectile* Projectile = World->SpawnActor<AFPSProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, SpawnParams);
+			if (Projectile)
+			{
+				// 발사체 생성 및 발사
+				FVector LaunchDirection = MuzzleRotation.Vector();
+				Projectile->FireInDirection(LaunchDirection);
+			}
+		}
+	}
 }
